@@ -1,0 +1,57 @@
+from typing import List
+
+class Trie:
+
+    def __init__(self):
+        self.root = {}    
+
+    def insert(self, word: str) -> None:
+        node = self.root
+
+        for char in word:
+            if char not in node:
+                node[char] = {}
+            node = node[char]
+        node["."] = {}
+
+    def search(self, word: str) -> bool:
+        traversed = Trie.traverse(word, self.root)
+        return traversed and "." in traversed
+
+    def startsWith(self, prefix: str) -> bool:
+        traversed = Trie.traverse(prefix, self.root)
+        return traversed is not None
+
+    def traverse(word: str, node: {}) -> {}:
+        for w in word:
+            if w in node:
+                node = node[w]
+            else:
+                return None
+        return node
+        
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
+
+        
+
+
+if __name__ == '__main__':
+
+    # ["Trie", "insert", "search", "search", "startsWith", "insert", "search"]
+    # [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+
+    trie = Trie()
+    trie.insert("apple")
+    print(trie.search("apple"))   # return True
+    print(trie.search("app"))     # return False
+    print(trie.startsWith("app")) # return True
+    trie.insert("app")
+    print(trie.search("app"))     # return True
+
+    print(trie.startsWith("fish")) # return False    
+
+ 
