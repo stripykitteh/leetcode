@@ -1,0 +1,6 @@
+#!/bin/bash
+
+start=$(date +%s)
+
+end=$(date +%s)
+echo "Elapsed time: $(($end-$start)) seconds"
